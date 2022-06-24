@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apk-dept
+  namespace: static
+spec:
+  replicas: 6
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: apk-dept
+  template:
+    metadata:
+      labels:
+        app: apk-dept
+    spec:
+      containers:
+      - name: apk-dept
+        image: saikrish12345/rolling_update_static:2
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "300Mi"
+            cpu: "200m"
+        ports:
+        - containerPort: 8080
+

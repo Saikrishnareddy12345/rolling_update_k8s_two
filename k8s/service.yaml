@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name:  static-svc
+  namespace: static
+spec:
+  selector:
+    app:  apk-dept  #selector name should be matched to deployment.yml selector
+  type:  ClusterIP 
+  ports:
+  - name:  static
+    port:  80
+    targetPort:  80

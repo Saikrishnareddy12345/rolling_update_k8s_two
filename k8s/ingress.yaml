@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: static-ingress
+  namespace: static
+spec:
+  tls:
+  - hosts:
+    - static.saikrish.xyz
+    secretName: static.saikrish.xyz-tls
+  rules:
+  - host: static.saikrish.xyz
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: static-svc    #service name should be matched to the svc.yml file inside the metadata block name
+            port:
+              number: 80
